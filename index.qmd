@@ -1,0 +1,20 @@
+---
+title: "Rutgers MSDS-534 - Statistical Learning"
+---
+
+## Fall 2025
+
+**Instructor:** Gemma Moran
+
+**Instructor website:** [link](https://www.gemma-moran.com)
+
+## Getting started
+
+See [here](getting-started/getting-started.ipynb) for details about how to get started with python, VSCode and PyTorch. 
+
+## Lectures
+
+The code from the lectures is in the left sidebar. 
+
+Lecture slides and information about homeworks, office hours etc. can be found on Canvas.
+
