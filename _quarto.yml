@@ -16,7 +16,9 @@ website:
       - getting-started/getting-started.ipynb
       - lec-1/lecture-1.ipynb
       - lec-2/lecture-2.ipynb
-
+  repo-url: https://github.com/moran-teaching/msds534-website   
+  repo-branch: main                                             
+  repo-actions: [source] 
         
 format:
   html:
