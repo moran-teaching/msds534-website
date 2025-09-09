@@ -328,16 +328,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>nn.Module</code> is everywhere in PyTorch and represents mappings in neural networks.</li>
 </ul>
 <p>Indented beneath the class statement are the methods of this class: <code>__init__</code>, <code>forward</code> and <code>loss_fn</code></p>
-<p><code>__init__</code></p>
 <ul>
-<li><p>all classes have an <code>__init__</code> which is executed when the class is instantiated</p></li>
-<li><p><code>self</code> refers to an instance of the class</p>
+<li><p><code>__init__</code></p>
 <ul>
+<li>all classes have an <code>__init__</code> which is executed when the class is instantiated</li>
+<li><code>self</code> refers to an instance of the class</li>
 <li>in <code>__init__</code>, we have attached an object to self as an attribute <code>sequential</code>, which defines the neural network architecture</li>
+<li><code>super().__init__()</code> is a call to the <code>__init__</code> of <code>nn.Module</code>. For torch models, we will always be making this <code>super()</code> call as it is necessary for the model to be properly interpreted by torch.</li>
 </ul></li>
-<li><p><code>super().__init__()</code> is a call to the <code>__init__</code> of <code>nn.Module</code>. For torch models, we will always be making this <code>super()</code> call as it is necessary for the model to be properly interpreted by torch.</p></li>
-<li><p>The function <code>forward</code> is called when the neural network is run on input data.</p></li>
-<li><p>The <code>loss_fn</code> is the objective function we will optimize.</p></li>
+<li><p><code>forward</code> is called when the neural network is run on input data.</p></li>
+<li><p><code>loss_fn</code> is the objective function we will optimize.</p></li>
 </ul>
 <p>(Above explanation adapted from <a href="https://github.com/intro-stat-learning/ISLP_labs/blob/stable/Ch10-deeplearning-lab.ipynb">ISLP labs</a>)</p>
 <div id="d7a899b1" class="cell" data-execution_count="63">
