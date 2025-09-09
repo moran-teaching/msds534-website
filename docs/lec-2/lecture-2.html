@@ -194,10 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#training" id="toc-training" class="nav-link" data-scroll-target="#training">Training</a></li>
   </ul></li>
   <li><a href="#mnist-example" id="toc-mnist-example" class="nav-link" data-scroll-target="#mnist-example">MNIST example</a></li>
-  <li><a href="#heteroskedastic-regression" id="toc-heteroskedastic-regression" class="nav-link" data-scroll-target="#heteroskedastic-regression">Heteroskedastic regression</a>
-  <ul class="collapse">
-  <li><a href="#define-neural-network" id="toc-define-neural-network" class="nav-link" data-scroll-target="#define-neural-network">Define neural network</a></li>
-  </ul></li>
+  <li><a href="#heteroskedastic-regression" id="toc-heteroskedastic-regression" class="nav-link" data-scroll-target="#heteroskedastic-regression">Heteroskedastic regression</a></li>
   </ul>
 </nav>
     </div>
@@ -225,24 +222,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="import-packages" class="level3">
 <h3 class="anchored" data-anchor-id="import-packages">Import packages</h3>
-<div id="e7280cd5" class="cell" data-execution_count="50">
+<div id="e7280cd5" class="cell" data-execution_count="59">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch <span class="im">import</span> optim</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> TensorDataset, DataLoader</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torchvision</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch <span class="im">import</span> optim</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> TensorDataset, DataLoader</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torchvision</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The “XOR” (or “exclusive OR”) problem is often used to illustrate the ability of neural networks to fit complicated functions. The XOR problem has a checkerboard structure:</p>
-<div id="8e990dda" class="cell" data-execution_count="51">
+<div id="8e990dda" class="cell" data-execution_count="60">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># xor ------------------------------------</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">5000</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">2</span></span>
@@ -268,7 +264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Logistic regression can only fit linear decision boundaries, and so fails the XOR problem.</p>
-<div id="bd6b71c4" class="cell">
+<div id="bd6b71c4" class="cell" data-execution_count="61">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">## logitstic regression doesn't work</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>log_fit <span class="op">=</span> LogisticRegression()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>log_fit.fit(x, y)</span>
@@ -280,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.axline([<span class="dv">0</span>,<span class="dv">0</span>], slope<span class="op">=</span>coeff)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">## title</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>logit_plot.figure.subplots_adjust(top<span class="op">=</span><span class="fl">.9</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>logit_plot.figure.suptitle(<span class="bu">str</span>(<span class="bu">round</span>(coeffs[<span class="dv">0</span>], <span class="dv">2</span>)) <span class="op">+</span> <span class="vs">r'$x_1$ - '</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">round</span>(<span class="op">-</span>coeffs[<span class="dv">1</span>], <span class="dv">2</span>)) <span class="op">+</span> <span class="vs">r'$x_2$'</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>logit_plot.figure.suptitle(<span class="bu">str</span>(<span class="bu">round</span>(coeffs[<span class="dv">0</span>], <span class="dv">2</span>)) <span class="op">+</span> <span class="vs">r'$x_1$ + '</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">round</span>(<span class="op">-</span>coeffs[<span class="dv">1</span>], <span class="dv">2</span>)) <span class="op">+</span> <span class="vs">r'$x_2$'</span>)</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">## fill in area</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>x_fill <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, num<span class="op">=</span><span class="dv">200</span>)</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>y_line <span class="op">=</span> coeff <span class="op">*</span> x_fill</span>
@@ -299,17 +295,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="neural-networks" class="level2">
 <h2 class="anchored" data-anchor-id="neural-networks">Neural networks</h2>
 <p>Let’s set up a 1-layer neural network to solve the XOR problem.</p>
-<p>For deep learning, we use the <code>torch</code> package, available at https://pytorch.org.</p>
+<p>For deep learning, we use the <code>torch</code> package, available <a href="https://pytorch.org">here</a>.</p>
 <section id="neural-network-classes-in-pytorch" class="level3">
 <h3 class="anchored" data-anchor-id="neural-network-classes-in-pytorch">Neural network classes in PyTorch</h3>
 <p><code>torch</code> provides a base class called <code>nn.Module</code>.</p>
 <p>When we set up a neural network, we sub-class <code>nn.Module</code>.</p>
 <p>Here is an example of a neural network in <code>torch</code> named <code>XORNet</code>.</p>
-<div id="1705ab3c" class="cell" data-execution_count="53">
+<div id="1705ab3c" class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> XORNet(nn.Module):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_dim, hidden_dim):</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>(XORNet, <span class="va">self</span>).<span class="fu">__init__</span>()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.sequential <span class="op">=</span> nn.Sequential(</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            nn.Linear(input_dim, hidden_dim),</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            nn.Sigmoid(),</span>
@@ -330,14 +326,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Indented beneath the class statement are the methods of this class: in this case <code>__init__</code>, <code>forward</code> and <code>loss_fn</code>. The <code>__init__</code> method is called when an instance of the class is created. In the methods, self always refers to an instance of the class. In the <code>__init__</code> method, we have attached an object to self as an attribute: sequential, that defines the neural network architecture.</p>
 <p>There is one additional line in the <code>__init__</code> method, which is a call to <code>super()</code>. This function allows subclasses (i.e.&nbsp;<code>XORNet</code>) to access methods of the class they inherit from. For example, the class <code>nn.Module</code> has its own <code>__init__</code> method, which is different from the <code>XORNet.__init__()</code> method we’ve written above. Using <code>super()</code> allows us to call the method of the base class. For torch models, we will always be making this <code>super()</code> call as it is necessary for the model to be properly interpreted by torch.</p>
 <p>The function <code>forward</code> is called when the neural network is run on input data.</p>
-<p>(above explanation adapted from https://github.com/intro-stat-learning/ISLP_labs/blob/stable/Ch10-deeplearning-lab.ipynb)</p>
-<div id="d7a899b1" class="cell" data-execution_count="54">
+<p>(Above explanation adapted from <a href="https://github.com/intro-stat-learning/ISLP_labs/blob/stable/Ch10-deeplearning-lab.ipynb">ISLP labs</a>)</p>
+<div id="d7a899b1" class="cell" data-execution_count="63">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>hidden_dim<span class="op">=</span><span class="dv">2</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> XORNet(input_dim<span class="op">=</span>p, hidden_dim<span class="op">=</span>hidden_dim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="b3900688" class="cell" data-execution_count="55">
+<div id="b3900688" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>model</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="55">
+<div class="cell-output cell-output-display" data-execution_count="64">
 <pre><code>XORNet(
   (sequential): Sequential(
     (0): Linear(in_features=2, out_features=2, bias=True)
@@ -352,23 +348,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
 <p>For torch to read the data, it needs to be a <code>torch.tensor</code> type:</p>
-<div id="22919986" class="cell" data-execution_count="56">
+<div id="22919986" class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x_train <span class="op">=</span> torch.tensor(x, dtype<span class="op">=</span>torch.<span class="bu">float</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> torch.tensor(y, dtype<span class="op">=</span>torch.<span class="bu">float</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We combine <code>x_train</code> and <code>y_train</code> into a <code>TensorDataset</code>, a dataset recognizable by torch. <code>TensorDataset</code> stores the samples and their labels. It is a subclass of the more general <code>torch.utils.data.Dataset</code>, which you can customize for non-standard data.</p>
-<div id="139fedaa" class="cell" data-execution_count="57">
+<div id="139fedaa" class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>train_data <span class="op">=</span> TensorDataset(x_train, y_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>TensorDataset</code> is helpful as it can be passed to <code>DataLoader()</code>. <code>DataLoader</code> wraps an iterable around the <code>Dataset</code> class to enable easy access to the samples. This is very helpful for implementing stochastic gradient descent, where we iterate over subsets (batches) of the data.</p>
-<div id="c13f5de9" class="cell" data-execution_count="58">
+<div id="c13f5de9" class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>train_loader <span class="op">=</span> DataLoader(dataset<span class="op">=</span>train_data, batch_size<span class="op">=</span><span class="dv">10</span>, shuffle<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="training" class="level3">
 <h3 class="anchored" data-anchor-id="training">Training</h3>
 <p>We now set up the optimizer for training. We use Adam, and a base learning rate of <code>lr=0.01</code>. We set the number of epochs to 100. (Rule of thumb: pick largest <code>lr</code> that still results in convergence)</p>
-<div id="5349f479" class="cell" data-execution_count="59">
+<div id="5349f479" class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> <span class="fl">0.01</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -376,7 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># set model to training mode</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>model.train()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="59">
+<div class="cell-output cell-output-display" data-execution_count="68">
 <pre><code>XORNet(
   (sequential): Sequential(
     (0): Linear(in_features=2, out_features=2, bias=True)
@@ -388,37 +384,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Now we train the model:</p>
-<div id="28877159" class="cell" data-execution_count="60">
+<div id="28877159" class="cell" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># in each epoch, iterate over all batches of data (easily accessed through train_loader)</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x_batch, y_batch <span class="kw">in</span> train_loader:</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        pred <span class="op">=</span> model(x_batch)                   <span class="co"># this is the output from the forward function</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> model.loss_fn(y_batch, pred)     <span class="co"># calculate loss function</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        loss.backward()                         <span class="co"># computes gradients wrt loss function</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        optimizer.step()                        <span class="co"># updates parameters </span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()                   <span class="co"># set the gradients back to zero (otherwise grads are accumulated)</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> epoch <span class="op">%</span> <span class="dv">10</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'epoch: '</span>, epoch, <span class="st">'loss:'</span>, <span class="ss">f"</span><span class="sc">{</span>loss<span class="sc">.</span>item()<span class="sc">:.3}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    l <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x_batch, y_batch <span class="kw">in</span> train_loader:</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        pred <span class="op">=</span> model(x_batch)                   <span class="co"># this is the output from the forward function</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> model.loss_fn(y_batch, pred)     <span class="co"># calculate loss function</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        loss.backward()                         <span class="co"># computes gradients wrt loss function</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        optimizer.step()                        <span class="co"># updates parameters </span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()                   <span class="co"># set the gradients back to zero (otherwise grads are accumulated)</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        l <span class="op">+=</span> loss.item()</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> epoch <span class="op">%</span> <span class="dv">10</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'epoch: '</span>, epoch, <span class="st">'loss:'</span>, <span class="ss">f"</span><span class="sc">{</span>l<span class="sc">:.3}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch:  0 loss: 7.3
-epoch:  10 loss: 6.52
-epoch:  20 loss: 4.98
-epoch:  30 loss: 1.62
-epoch:  40 loss: 1.48
-epoch:  50 loss: 6.74
-epoch:  60 loss: 6.34
-epoch:  70 loss: 7.61
-epoch:  80 loss: 1.87
-epoch:  90 loss: 4.02</code></pre>
+<pre><code>epoch:  0 loss: 3.43e+03
+epoch:  10 loss: 1.92e+03
+epoch:  20 loss: 1.9e+03
+epoch:  30 loss: 1.89e+03
+epoch:  40 loss: 1.89e+03
+epoch:  50 loss: 1.88e+03
+epoch:  60 loss: 1.88e+03
+epoch:  70 loss: 1.88e+03
+epoch:  80 loss: 1.88e+03
+epoch:  90 loss: 1.88e+03</code></pre>
 </div>
 </div>
 <p>To visualize the end result, we plot the predicted values over the whole space (the decision surface).</p>
-<div id="9f4dd4b9" class="cell" data-execution_count="61">
+<div id="9f4dd4b9" class="cell" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.05</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.05</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -443,8 +442,7 @@ epoch:  90 loss: 4.02</code></pre>
 <span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>fig.set_size_inches(<span class="dv">4</span>, <span class="dv">4</span>)</span>
 <span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>ax.contourf(x1, x2, y_pred_np, cmap<span class="op">=</span>custom_cmap)</span>
-<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>ax.scatter(x[<span class="dv">0</span>:<span class="dv">100</span>,<span class="dv">0</span>], x[<span class="dv">0</span>:<span class="dv">100</span>,<span class="dv">1</span>], c<span class="op">=</span>cols[<span class="dv">0</span>:<span class="dv">100</span>])</span>
-<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>fig.savefig(<span class="st">'xor_nn_d_'</span> <span class="op">+</span> <span class="bu">str</span>(hidden_dim) <span class="op">+</span> <span class="st">'.png'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>ax.scatter(x[<span class="dv">0</span>:<span class="dv">100</span>,<span class="dv">0</span>], x[<span class="dv">0</span>:<span class="dv">100</span>,<span class="dv">1</span>], c<span class="op">=</span>cols[<span class="dv">0</span>:<span class="dv">100</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -453,34 +451,34 @@ epoch:  90 loss: 4.02</code></pre>
 </div>
 </div>
 </div>
-<div id="340effae" class="cell" data-execution_count="62">
+<div id="340effae" class="cell" data-execution_count="71">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>model.sequential[<span class="dv">0</span>].weight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="62">
+<div class="cell-output cell-output-display" data-execution_count="71">
 <pre><code>Parameter containing:
-tensor([[-1.6960,  1.6642],
-        [-2.1710,  2.3189]], requires_grad=True)</code></pre>
+tensor([[ 1.9588, -2.0800],
+        [ 1.8403, -1.9693]], requires_grad=True)</code></pre>
 </div>
 </div>
-<div id="da28701f" class="cell" data-execution_count="63">
+<div id="da28701f" class="cell" data-execution_count="72">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>model.sequential[<span class="dv">0</span>].bias</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="63">
+<div class="cell-output cell-output-display" data-execution_count="72">
 <pre><code>Parameter containing:
-tensor([-3.2356,  3.5178], requires_grad=True)</code></pre>
+tensor([ 3.2469, -3.4566], requires_grad=True)</code></pre>
 </div>
 </div>
-<div id="181bf5cb" class="cell" data-execution_count="68">
+<div id="181bf5cb" class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>model.sequential[<span class="dv">2</span>].weight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="68">
+<div class="cell-output cell-output-display" data-execution_count="73">
 <pre><code>Parameter containing:
-tensor([[10.2405, -7.8394]], requires_grad=True)</code></pre>
+tensor([[-7.8841, 10.4450]], requires_grad=True)</code></pre>
 </div>
 </div>
 <p>Play around with different sizes of <code>hidden_dim</code> and see the difference!</p>
-<div id="47615131" class="cell" data-execution_count="69">
+<div id="47615131" class="cell" data-execution_count="74">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>model.sequential[<span class="dv">2</span>].bias</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="69">
+<div class="cell-output cell-output-display" data-execution_count="74">
 <pre><code>Parameter containing:
-tensor([5.3345], requires_grad=True)</code></pre>
+tensor([5.2895], requires_grad=True)</code></pre>
 </div>
 </div>
 </section>
@@ -488,7 +486,7 @@ tensor([5.3345], requires_grad=True)</code></pre>
 <section id="mnist-example" class="level2">
 <h2 class="anchored" data-anchor-id="mnist-example">MNIST example</h2>
 <p>We use <code>torchvision.datasets</code> to download the MNIST data.</p>
-<div id="dbd53224" class="cell" data-execution_count="29">
+<div id="dbd53224" class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>(mnist_train,</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a> mnist_test) <span class="op">=</span> [torchvision.datasets.MNIST(root<span class="op">=</span><span class="st">'data'</span>,</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                      train<span class="op">=</span>train,</span>
@@ -515,12 +513,12 @@ tensor([5.3345], requires_grad=True)</code></pre>
 </div>
 </div>
 <p>Set up our dataloaders.</p>
-<div id="1a27f979" class="cell" data-execution_count="30">
+<div id="1a27f979" class="cell" data-execution_count="76">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>train_loader <span class="op">=</span> DataLoader(dataset<span class="op">=</span>mnist_train, batch_size<span class="op">=</span><span class="dv">64</span>, shuffle<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>test_loader <span class="op">=</span> DataLoader(dataset<span class="op">=</span>mnist_test, batch_size<span class="op">=</span><span class="dv">10000</span>, shuffle<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s define our neural network for the MNIST classification problem.</p>
-<div id="52646122" class="cell" data-execution_count="31">
+<div id="52646122" class="cell" data-execution_count="77">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MNISTNet(nn.Module):</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
@@ -545,11 +543,11 @@ tensor([5.3345], requires_grad=True)</code></pre>
 <span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> loss</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Instantiate our model:</p>
-<div id="941735c5" class="cell" data-execution_count="32">
+<div id="941735c5" class="cell" data-execution_count="78">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> MNISTNet()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Train our model:</p>
-<div id="de19dbc8" class="cell" data-execution_count="33">
+<div id="de19dbc8" class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> <span class="fl">0.001</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">50</span></span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -559,29 +557,32 @@ tensor([5.3345], requires_grad=True)</code></pre>
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>model.train()</span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x_batch, y_batch <span class="kw">in</span> train_loader:</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>        x_batch <span class="op">=</span> x_batch.reshape(x_batch.shape[<span class="dv">0</span>], <span class="dv">28</span><span class="op">*</span><span class="dv">28</span>)</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>        y_batch <span class="op">=</span> F.one_hot(y_batch, num_classes<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>        y_pred <span class="op">=</span> model(x_batch)</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> model.loss_fn(y_batch, y_pred)</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>        loss.backward()</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>        optimizer.step()</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> epoch <span class="op">%</span> <span class="dv">10</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'epoch: '</span>, epoch, <span class="st">'loss:'</span>, <span class="ss">f"</span><span class="sc">{</span>loss<span class="sc">.</span>item()<span class="sc">:.3}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    l <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x_batch, y_batch <span class="kw">in</span> train_loader:</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>        x_batch <span class="op">=</span> x_batch.reshape(x_batch.shape[<span class="dv">0</span>], <span class="dv">28</span><span class="op">*</span><span class="dv">28</span>)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>        y_batch <span class="op">=</span> F.one_hot(y_batch, num_classes<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>        y_pred <span class="op">=</span> model(x_batch)</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> model.loss_fn(y_batch, y_pred)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>        loss.backward()</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>        optimizer.step()</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>        l <span class="op">+=</span> loss.item()</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> epoch <span class="op">%</span> <span class="dv">10</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'epoch: '</span>, epoch, <span class="st">'loss:'</span>, <span class="ss">f"</span><span class="sc">{</span>l<span class="sc">:.3}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch:  0 loss: 0.027
-epoch:  10 loss: 0.0456
-epoch:  20 loss: 6.32e-05
-epoch:  30 loss: 0.0436
-epoch:  40 loss: 2.63e-05</code></pre>
+<pre><code>epoch:  0 loss: 2.63e+02
+epoch:  10 loss: 12.6
+epoch:  20 loss: 5.3
+epoch:  30 loss: 6.31
+epoch:  40 loss: 4.5</code></pre>
 </div>
 </div>
 <p>Calculate our accuracy:</p>
-<div id="a1ef6293" class="cell" data-execution_count="34">
+<div id="a1ef6293" class="cell" data-execution_count="80">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">eval</span>()</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>x_batch, y_batch <span class="op">=</span> <span class="bu">next</span>(<span class="bu">iter</span>(test_loader))</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>x_batch <span class="op">=</span> x_batch.reshape(x_batch.shape[<span class="dv">0</span>], <span class="dv">28</span> <span class="op">*</span> <span class="dv">28</span>)</span>
@@ -590,8 +591,8 @@ epoch:  40 loss: 2.63e-05</code></pre>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>acc <span class="op">=</span> (y_pred <span class="op">==</span> y_batch).<span class="bu">sum</span>()</span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>acc <span class="op">=</span> acc <span class="op">/</span> <span class="bu">len</span>(y_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Let’s look at some interesting results (code adapted from https://github.com/probml/pyprobml/blob/master/notebooks/book1/13/mlp_mnist_tf.ipynb)</p>
-<div id="362ac10b" class="cell" data-execution_count="35">
+<p>Let’s look at some interesting results (code adapted from <a href="https://github.com/probml/pyprobml/blob/master/notebooks/book1/13/mlp_mnist_tf.ipynb">here</a>)</p>
+<div id="362ac10b" class="cell" data-execution_count="81">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find interesting test images</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>errors <span class="op">=</span> torch.where(y_pred <span class="op">!=</span> y_batch)[<span class="dv">0</span>]</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>inds1 <span class="op">=</span> <span class="bu">range</span>(<span class="dv">8</span>)</span>
@@ -645,8 +646,8 @@ epoch:  40 loss: 2.63e-05</code></pre>
 </section>
 <section id="heteroskedastic-regression" class="level2">
 <h2 class="anchored" data-anchor-id="heteroskedastic-regression">Heteroskedastic regression</h2>
-<p>This code is adapted from https://github.com/probml/pyprobml/blob/master/notebooks/book1/13/mlp_1d_regression_hetero_tfp.ipynb</p>
-<div id="83e1daef" class="cell" data-execution_count="36">
+<p>This code is adapted from <a href="https://github.com/probml/pyprobml/blob/master/notebooks/book1/13/mlp_1d_regression_hetero_tfp.ipynb">here</a>.</p>
+<div id="83e1daef" class="cell" data-execution_count="82">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make data</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>x_range <span class="op">=</span> [<span class="op">-</span><span class="dv">20</span>, <span class="dv">60</span>]  <span class="co"># test</span></span>
@@ -677,9 +678,8 @@ epoch:  40 loss: 2.63e-05</code></pre>
 <span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>y, x, x_test <span class="op">=</span> load_dataset()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="define-neural-network" class="level3">
-<h3 class="anchored" data-anchor-id="define-neural-network">Define neural network</h3>
-<div id="bbf7144e" class="cell" data-execution_count="37">
+<p>Define neural network</p>
+<div id="bbf7144e" class="cell" data-execution_count="83">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HetNet(nn.Module):</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, input_dim, output_dim, hidden_dims, mean_dims, var_dims):</span>
@@ -749,7 +749,7 @@ epoch:  40 loss: 2.63e-05</code></pre>
 <span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Set up data</p>
-<div id="61253431" class="cell" data-execution_count="38">
+<div id="61253431" class="cell" data-execution_count="84">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>x_train <span class="op">=</span> torch.tensor(x, dtype<span class="op">=</span>torch.<span class="bu">float</span>)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> torch.tensor(y, dtype<span class="op">=</span>torch.<span class="bu">float</span>)</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y_train.unsqueeze(<span class="op">-</span><span class="dv">1</span>)</span>
@@ -758,14 +758,14 @@ epoch:  40 loss: 2.63e-05</code></pre>
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>train_loader <span class="op">=</span> DataLoader(dataset<span class="op">=</span>train_data, batch_size<span class="op">=</span><span class="dv">10</span>, shuffle<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Initialize model</p>
-<div id="9bbcd504" class="cell" data-execution_count="39">
+<div id="9bbcd504" class="cell" data-execution_count="85">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>hidden_dims <span class="op">=</span> [<span class="dv">50</span>, <span class="dv">50</span>]</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>mean_dims <span class="op">=</span> [<span class="dv">20</span>]</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>var_dims <span class="op">=</span> [<span class="dv">20</span>]</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> HetNet(input_dim<span class="op">=</span><span class="dv">1</span>, output_dim<span class="op">=</span><span class="dv">1</span>, hidden_dims<span class="op">=</span>hidden_dims, mean_dims<span class="op">=</span>mean_dims, var_dims<span class="op">=</span>var_dims)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Train</p>
-<div id="a38b9c87" class="cell" data-execution_count="40">
+<div id="a38b9c87" class="cell" data-execution_count="86">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> <span class="fl">0.001</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">500</span></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -775,31 +775,34 @@ epoch:  40 loss: 2.63e-05</code></pre>
 <span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>model.train()</span>
 <span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x_batch, y_batch <span class="kw">in</span> train_loader:</span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> model.loss_fn(x_batch, y_batch)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    l <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x_batch, y_batch <span class="kw">in</span> train_loader:</span>
 <span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>        loss.backward()</span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>        optimizer.step()</span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()</span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> epoch <span class="op">%</span> <span class="dv">50</span> <span class="op">==</span> <span class="dv">0</span>:</span>
-<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'epoch: '</span>, epoch, <span class="st">'loss:'</span>, <span class="ss">f"</span><span class="sc">{</span>loss<span class="sc">.</span>item()<span class="sc">:.3}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> model.loss_fn(x_batch, y_batch)</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>        loss.backward()</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>        optimizer.step()</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()</span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>        l <span class="op">+=</span> loss.item()</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> epoch <span class="op">%</span> <span class="dv">50</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'epoch: '</span>, epoch, <span class="st">'loss:'</span>, <span class="ss">f"</span><span class="sc">{</span>l<span class="sc">:.3}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>epoch:  0 loss: 0.616
-epoch:  50 loss: -0.806
-epoch:  100 loss: 0.329
-epoch:  150 loss: 0.142
-epoch:  200 loss: 0.0874
-epoch:  250 loss: -0.403
-epoch:  300 loss: 1.06
-epoch:  350 loss: -0.222
-epoch:  400 loss: -0.614
-epoch:  450 loss: -0.372</code></pre>
+<pre><code>epoch:  0 loss: 1.23e+02
+epoch:  50 loss: -5.78
+epoch:  100 loss: -17.2
+epoch:  150 loss: -27.7
+epoch:  200 loss: -27.3
+epoch:  250 loss: -32.9
+epoch:  300 loss: -33.2
+epoch:  350 loss: -32.1
+epoch:  400 loss: -32.4
+epoch:  450 loss: -31.2</code></pre>
 </div>
 </div>
 <p>Plot results</p>
-<div id="8909f539" class="cell" data-execution_count="41">
+<div id="8909f539" class="cell" data-execution_count="87">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">eval</span>()</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>mean, log_var <span class="op">=</span> model(x_train)</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>sd <span class="op">=</span> torch.exp(<span class="fl">0.5</span> <span class="op">*</span> log_var)</span>
@@ -822,7 +825,6 @@ epoch:  450 loss: -0.372</code></pre>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
