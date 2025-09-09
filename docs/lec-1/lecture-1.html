@@ -264,24 +264,25 @@ window.Quarto = {
 </header>
 
 
-<div id="cell-1" class="cell" data-execution_count="91">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> ticker, cm</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.interpolate <span class="im">import</span> splrep, BSpline</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> subplots</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-1" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> ticker, cm</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.interpolate <span class="im">import</span> splrep, BSpline</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mpl_toolkits.mplot3d <span class="im">import</span> Axes3D</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.pyplot <span class="im">import</span> subplots</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="linear-regression-example" class="level2">
 <h2 class="anchored" data-anchor-id="linear-regression-example">Linear Regression example</h2>
@@ -364,64 +365,7 @@ window.Quarto = {
 </section>
 <section id="shrinkage-plot" class="level2">
 <h2 class="anchored" data-anchor-id="shrinkage-plot">Shrinkage plot</h2>
-<div id="cell-15" class="cell" data-execution_count="98">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">90</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.zeros(p)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>beta[<span class="dv">0</span>]<span class="op">=</span><span class="dv">3</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>beta[<span class="dv">1</span>]<span class="op">=</span><span class="dv">3</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>cov <span class="op">=</span> <span class="fl">0.6</span> <span class="op">*</span> np.ones((p, p))</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>np.fill_diagonal(cov, <span class="dv">1</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.multivariate_normal(mean<span class="op">=</span>np.zeros(p), cov<span class="op">=</span>cov, size<span class="op">=</span>n)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.matmul(x, beta) <span class="op">+</span> np.random.normal(size<span class="op">=</span>n)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>beta1 <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">5</span>, <span class="dv">10</span>, <span class="fl">0.05</span>)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>beta2 <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">5</span>, <span class="dv">10</span>, <span class="fl">0.05</span>)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>beta_plot <span class="op">=</span> [np.array((i, j)) <span class="cf">for</span> i <span class="kw">in</span> beta1 <span class="cf">for</span> j <span class="kw">in</span> beta2]</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ls_func(beta):</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    beta_full <span class="op">=</span> np.zeros(p)</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    beta_full[<span class="dv">0</span>] <span class="op">=</span> beta[<span class="dv">0</span>]</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    beta_full[<span class="dv">1</span>] <span class="op">=</span> beta[<span class="dv">1</span>]</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    sum_square <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> np.<span class="bu">sum</span>(np.power(y <span class="op">-</span> np.matmul(x, beta_full), <span class="dv">2</span>))</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sum_square</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> [ls_func(i) <span class="cf">for</span> i <span class="kw">in</span> beta_plot]</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> np.array(out)</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> np.reshape(z, (<span class="bu">len</span>(beta1), <span class="bu">len</span>(beta2)))</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> np.transpose(z)</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>lev_exp <span class="op">=</span> np.linspace(np.log10(z.<span class="bu">min</span>()), np.log10(z.<span class="bu">max</span>()), num <span class="op">=</span> <span class="dv">15</span>)</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>levs <span class="op">=</span> np.power(<span class="dv">10</span>, lev_exp)</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>fig.set_size_inches(<span class="dv">8</span>, <span class="dv">4</span>)</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>cs <span class="op">=</span> ax[<span class="dv">0</span>].contourf(beta1, beta2, z, levels<span class="op">=</span>levs, cmap<span class="op">=</span>cm.PuBu_r)</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].plot(beta[<span class="dv">0</span>], beta[<span class="dv">1</span>], marker <span class="op">=</span> <span class="st">'.'</span>, ls<span class="op">=</span><span class="st">'none'</span>)</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].annotate(<span class="vs">r'$\beta^*$'</span>, (beta[<span class="dv">0</span>] <span class="op">+</span> <span class="fl">0.1</span>, beta[<span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.1</span>), fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">'white'</span>)</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="vs">r'$\beta_1$'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="vs">r'$\beta_2$'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>x_fill <span class="op">=</span> np.linspace(<span class="op">-</span>alpha, alpha, <span class="dv">500</span>)</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>y_ridge_up <span class="op">=</span> np.sqrt(alpha<span class="op">**</span><span class="dv">2</span><span class="op">-</span>x_fill<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>y_ridge_down <span class="op">=</span> <span class="op">-</span>np.sqrt(alpha<span class="op">**</span><span class="dv">2</span><span class="op">-</span>x_fill<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].fill_between(x_fill, y_ridge_down, y_ridge_up, color<span class="op">=</span><span class="st">'orange'</span>)</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>cs <span class="op">=</span> ax[<span class="dv">1</span>].contourf(beta1, beta2, z, levels<span class="op">=</span>levs, cmap<span class="op">=</span>cm.PuBu_r)</span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].plot(beta[<span class="dv">0</span>], beta[<span class="dv">1</span>], marker <span class="op">=</span> <span class="st">'.'</span>, ls<span class="op">=</span><span class="st">'none'</span>)</span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].annotate(<span class="vs">r'$\beta^*$'</span>, (beta[<span class="dv">0</span>] <span class="op">+</span> <span class="fl">0.1</span>, beta[<span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.1</span>), fontsize<span class="op">=</span><span class="dv">14</span>, color<span class="op">=</span><span class="st">'white'</span>)</span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="vs">r'$\beta_1$'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_ylabel(<span class="vs">r'$\beta_2$'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>x_fill <span class="op">=</span> np.linspace(<span class="op">-</span>alpha, alpha, <span class="dv">500</span>)</span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>y_lasso_up <span class="op">=</span> (x_fill<span class="op">+</span>alpha) <span class="op">*</span> (x_fill <span class="op">&lt;</span> <span class="dv">0</span>) <span class="op">+</span> (<span class="op">-</span>x_fill <span class="op">+</span> alpha) <span class="op">*</span> (x_fill <span class="op">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>y_lasso_down <span class="op">=</span> <span class="op">-</span>(x_fill<span class="op">+</span>alpha) <span class="op">*</span> (x_fill <span class="op">&lt;</span> <span class="dv">0</span>) <span class="op">+</span> <span class="op">-</span>(<span class="op">-</span>x_fill <span class="op">+</span> alpha) <span class="op">*</span> (x_fill <span class="op">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].fill_between(x_fill, y_lasso_down, y_lasso_up, color<span class="op">=</span><span class="st">'orange'</span>)</span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-15" class="cell">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -435,41 +379,41 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="lasso-example">Lasso example</h2>
 <p>This code is adapted from <a href="https://github.com/intro-stat-learning/ISLP_labs/blob/stable/Ch06-varselect-lab.ipynb">ISLP labs</a>.</p>
 <div id="cell-17" class="cell" data-execution_count="99">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">90</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.zeros(p)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>beta[<span class="dv">0</span>]<span class="op">=</span><span class="dv">3</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>beta[<span class="dv">1</span>]<span class="op">=</span><span class="dv">3</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>cov <span class="op">=</span> <span class="fl">0.6</span> <span class="op">*</span> np.ones((p, p))</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>np.fill_diagonal(cov, <span class="dv">1</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.multivariate_normal(mean<span class="op">=</span>np.zeros(p), cov<span class="op">=</span>cov, size<span class="op">=</span>n)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.matmul(x, beta) <span class="op">+</span> np.random.normal(size<span class="op">=</span>n)</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>x_columns <span class="op">=</span> [<span class="st">'x'</span> <span class="op">+</span> <span class="bu">str</span>(i<span class="op">+</span><span class="dv">1</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(p)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">90</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.zeros(p)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>beta[<span class="dv">0</span>]<span class="op">=</span><span class="dv">3</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>beta[<span class="dv">1</span>]<span class="op">=</span><span class="dv">3</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>cov <span class="op">=</span> <span class="fl">0.6</span> <span class="op">*</span> np.ones((p, p))</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>np.fill_diagonal(cov, <span class="dv">1</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.multivariate_normal(mean<span class="op">=</span>np.zeros(p), cov<span class="op">=</span>cov, size<span class="op">=</span>n)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.matmul(x, beta) <span class="op">+</span> np.random.normal(size<span class="op">=</span>n)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>x_columns <span class="op">=</span> [<span class="st">'x'</span> <span class="op">+</span> <span class="bu">str</span>(i<span class="op">+</span><span class="dv">1</span>) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(p)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-18" class="cell" data-execution_count="100">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set up cross-validation</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>K<span class="op">=</span><span class="dv">5</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>kfold <span class="op">=</span> sklearn.model_selection.KFold(K,random_state<span class="op">=</span><span class="dv">0</span>,shuffle<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># function to standardize input</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler(with_mean<span class="op">=</span><span class="va">True</span>, with_std<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set up cross-validation</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>K<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>kfold <span class="op">=</span> sklearn.model_selection.KFold(K,random_state<span class="op">=</span><span class="dv">0</span>,shuffle<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># function to standardize input</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler(with_mean<span class="op">=</span><span class="va">True</span>, with_std<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-19" class="cell" data-execution_count="101">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lassoCV <span class="op">=</span> sklearn.linear_model.ElasticNetCV(n_alphas<span class="op">=</span><span class="dv">100</span>, l1_ratio<span class="op">=</span><span class="dv">1</span>,cv<span class="op">=</span>kfold)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>pipeCV <span class="op">=</span> Pipeline(steps<span class="op">=</span>[(<span class="st">'scaler'</span>, scaler),(<span class="st">'lasso'</span>, lassoCV)])</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>pipeCV.fit(x, y)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>tuned_lasso <span class="op">=</span> pipeCV.named_steps[<span class="st">'lasso'</span>]</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>tuned_lasso.alpha_</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>lambdas, soln_array <span class="op">=</span> sklearn.linear_model.Lasso.path(x, y,l1_ratio<span class="op">=</span><span class="dv">1</span>,n_alphas<span class="op">=</span><span class="dv">100</span>)[:<span class="dv">2</span>]</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>soln_path <span class="op">=</span> pd.DataFrame(soln_array.T,columns<span class="op">=</span>x_columns, index<span class="op">=-</span>np.log(lambdas))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>lassoCV <span class="op">=</span> sklearn.linear_model.ElasticNetCV(n_alphas<span class="op">=</span><span class="dv">100</span>, l1_ratio<span class="op">=</span><span class="dv">1</span>,cv<span class="op">=</span>kfold)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pipeCV <span class="op">=</span> Pipeline(steps<span class="op">=</span>[(<span class="st">'scaler'</span>, scaler),(<span class="st">'lasso'</span>, lassoCV)])</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>pipeCV.fit(x, y)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>tuned_lasso <span class="op">=</span> pipeCV.named_steps[<span class="st">'lasso'</span>]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>tuned_lasso.alpha_</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>lambdas, soln_array <span class="op">=</span> sklearn.linear_model.Lasso.path(x, y,l1_ratio<span class="op">=</span><span class="dv">1</span>,n_alphas<span class="op">=</span><span class="dv">100</span>)[:<span class="dv">2</span>]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>soln_path <span class="op">=</span> pd.DataFrame(soln_array.T,columns<span class="op">=</span>x_columns, index<span class="op">=-</span>np.log(lambdas))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-20" class="cell" data-execution_count="102">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>path_fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>soln_path.plot(ax<span class="op">=</span>ax, legend<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$-\log(\lambda)$'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Standardized coefficiients'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>path_fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>soln_path.plot(ax<span class="op">=</span>ax, legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$-\log(\lambda)$'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Standardized coefficiients'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -479,11 +423,11 @@ window.Quarto = {
 </div>
 </div>
 <div id="cell-21" class="cell" data-execution_count="103">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lassoCV_fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ax.errorbar(<span class="op">-</span>np.log(tuned_lasso.alphas_),tuned_lasso.mse_path_.mean(<span class="dv">1</span>),yerr<span class="op">=</span>tuned_lasso.mse_path_.std(<span class="dv">1</span>) <span class="op">/</span> np.sqrt(K))</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="op">-</span>np.log(tuned_lasso.alpha_), c<span class="op">=</span><span class="st">'k'</span>, ls<span class="op">=</span><span class="st">'--'</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$-\log(\lambda)$'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Cross-validated MSE'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lassoCV_fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ax.errorbar(<span class="op">-</span>np.log(tuned_lasso.alphas_),tuned_lasso.mse_path_.mean(<span class="dv">1</span>),yerr<span class="op">=</span>tuned_lasso.mse_path_.std(<span class="dv">1</span>) <span class="op">/</span> np.sqrt(K))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="op">-</span>np.log(tuned_lasso.alpha_), c<span class="op">=</span><span class="st">'k'</span>, ls<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$-\log(\lambda)$'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Cross-validated MSE'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -497,13 +441,13 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="ridge-regression">Ridge regression</h2>
 <p>This code is adapted from <a href="https://github.com/intro-stat-learning/ISLP_labs/blob/stable/Ch06-varselect-lab.ipynb">ISLP labs</a></p>
 <div id="cell-23" class="cell" data-execution_count="104">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>lambdas <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>np.linspace(<span class="dv">8</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">100</span>) <span class="op">/</span> y.std()</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ridgeCV <span class="op">=</span> sklearn.linear_model.ElasticNetCV(alphas<span class="op">=</span>lambdas, </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                           l1_ratio<span class="op">=</span><span class="dv">0</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                           cv<span class="op">=</span>kfold)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>pipeCV <span class="op">=</span> Pipeline(steps<span class="op">=</span>[(<span class="st">'scaler'</span>, scaler),</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                         (<span class="st">'ridge'</span>, ridgeCV)])</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>pipeCV.fit(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lambdas <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>np.linspace(<span class="dv">8</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">100</span>) <span class="op">/</span> y.std()</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ridgeCV <span class="op">=</span> sklearn.linear_model.ElasticNetCV(alphas<span class="op">=</span>lambdas, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                           l1_ratio<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                           cv<span class="op">=</span>kfold)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>pipeCV <span class="op">=</span> Pipeline(steps<span class="op">=</span>[(<span class="st">'scaler'</span>, scaler),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                         (<span class="st">'ridge'</span>, ridgeCV)])</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>pipeCV.fit(x, y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="104">
 <style>#sk-container-id-2 {
   /* Definition of color scheme common for light and dark mode */
@@ -1187,13 +1131,13 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 </div>
 </div>
 <div id="cell-24" class="cell" data-execution_count="105">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lambdas, soln_array <span class="op">=</span> sklearn.linear_model.ElasticNet.path(x, y,l1_ratio<span class="op">=</span><span class="dv">0</span>,alphas<span class="op">=</span>lambdas)[:<span class="dv">2</span>]</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>soln_path <span class="op">=</span> pd.DataFrame(soln_array.T,columns<span class="op">=</span>x_columns, index<span class="op">=-</span>np.log(lambdas))</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>path_fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>soln_path.plot(ax<span class="op">=</span>ax, legend<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$-\log(\lambda)$'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Standardized coefficiients'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>lambdas, soln_array <span class="op">=</span> sklearn.linear_model.ElasticNet.path(x, y,l1_ratio<span class="op">=</span><span class="dv">0</span>,alphas<span class="op">=</span>lambdas)[:<span class="dv">2</span>]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>soln_path <span class="op">=</span> pd.DataFrame(soln_array.T,columns<span class="op">=</span>x_columns, index<span class="op">=-</span>np.log(lambdas))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>path_fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>soln_path.plot(ax<span class="op">=</span>ax, legend<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$-\log(\lambda)$'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Standardized coefficiients'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1203,14 +1147,14 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 </div>
 </div>
 <div id="cell-25" class="cell" data-execution_count="106">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tuned_ridge <span class="op">=</span> pipeCV.named_steps[<span class="st">'ridge'</span>]</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ridgeCV_fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ax.errorbar(<span class="op">-</span>np.log(lambdas),</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>            tuned_ridge.mse_path_.mean(<span class="dv">1</span>),</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>            yerr<span class="op">=</span>tuned_ridge.mse_path_.std(<span class="dv">1</span>) <span class="op">/</span> np.sqrt(K))</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="op">-</span>np.log(tuned_ridge.alpha_), c<span class="op">=</span><span class="st">'k'</span>, ls<span class="op">=</span><span class="st">'--'</span>)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$-\log(\lambda)$'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Cross-validated MSE'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tuned_ridge <span class="op">=</span> pipeCV.named_steps[<span class="st">'ridge'</span>]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ridgeCV_fig, ax <span class="op">=</span> subplots(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">8</span>))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ax.errorbar(<span class="op">-</span>np.log(lambdas),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>            tuned_ridge.mse_path_.mean(<span class="dv">1</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>            yerr<span class="op">=</span>tuned_ridge.mse_path_.std(<span class="dv">1</span>) <span class="op">/</span> np.sqrt(K))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="op">-</span>np.log(tuned_ridge.alpha_), c<span class="op">=</span><span class="st">'k'</span>, ls<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'$-\log(\lambda)$'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Cross-validated MSE'</span>, fontsize<span class="op">=</span><span class="dv">20</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1224,24 +1168,24 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <h2 class="anchored" data-anchor-id="logistic-regression-example">Logistic regression example</h2>
 <p>Generate data</p>
 <div id="cell-27" class="cell" data-execution_count="107">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, size<span class="op">=</span>(n, p))</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.array([<span class="fl">2.5</span>, <span class="op">-</span><span class="fl">2.5</span>])</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> np.matmul(x, beta)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>prob <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>mu))</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.zeros((n))</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    y[i] <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, prob[i], <span class="dv">1</span>)[<span class="dv">0</span>]</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> np.hstack([y.reshape((n, <span class="dv">1</span>)), x])</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(df, columns <span class="op">=</span> [<span class="st">'y'</span>, <span class="st">'x1'</span>, <span class="st">'x2'</span>])</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>sns.set_theme()</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>logit_plot <span class="op">=</span> sns.relplot(df, x<span class="op">=</span><span class="st">'x1'</span>, y<span class="op">=</span><span class="st">'x2'</span>, hue<span class="op">=</span><span class="st">'y'</span>, style<span class="op">=</span><span class="st">'y'</span>)</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>logit_plot.figure.subplots_adjust(top<span class="op">=</span><span class="fl">.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, size<span class="op">=</span>(n, p))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> np.array([<span class="fl">2.5</span>, <span class="op">-</span><span class="fl">2.5</span>])</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> np.matmul(x, beta)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>prob <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>mu))</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.zeros((n))</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    y[i] <span class="op">=</span> np.random.binomial(<span class="dv">1</span>, prob[i], <span class="dv">1</span>)[<span class="dv">0</span>]</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> np.hstack([y.reshape((n, <span class="dv">1</span>)), x])</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(df, columns <span class="op">=</span> [<span class="st">'y'</span>, <span class="st">'x1'</span>, <span class="st">'x2'</span>])</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>sns.set_theme()</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>logit_plot <span class="op">=</span> sns.relplot(df, x<span class="op">=</span><span class="st">'x1'</span>, y<span class="op">=</span><span class="st">'x2'</span>, hue<span class="op">=</span><span class="st">'y'</span>, style<span class="op">=</span><span class="st">'y'</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>logit_plot.figure.subplots_adjust(top<span class="op">=</span><span class="fl">.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1252,26 +1196,26 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 </div>
 <p>Fitting the logistic regression model</p>
 <div id="cell-29" class="cell" data-execution_count="108">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>log_fit <span class="op">=</span> LogisticRegression()</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>log_fit.fit(x, y)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>coeffs <span class="op">=</span> log_fit.coef_[<span class="dv">0</span>]</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>coeff <span class="op">=</span> <span class="op">-</span>coeffs[<span class="dv">0</span>]<span class="op">/</span>coeffs[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>log_fit <span class="op">=</span> LogisticRegression()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>log_fit.fit(x, y)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>coeffs <span class="op">=</span> log_fit.coef_[<span class="dv">0</span>]</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>coeff <span class="op">=</span> <span class="op">-</span>coeffs[<span class="dv">0</span>]<span class="op">/</span>coeffs[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Plot <span class="math inline">x_1\beta_1 + x_2\beta_2 = 0</span></p>
 <div id="cell-31" class="cell" data-execution_count="109">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>logit_plot <span class="op">=</span> sns.relplot(df, x<span class="op">=</span><span class="st">'x1'</span>, y<span class="op">=</span><span class="st">'x2'</span>, hue<span class="op">=</span><span class="st">'y'</span>, style<span class="op">=</span><span class="st">'y'</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plt.axline([<span class="dv">0</span>,<span class="dv">0</span>], slope<span class="op">=</span>coeff)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">## title</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>logit_plot.figure.subplots_adjust(top<span class="op">=</span><span class="fl">.9</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>logit_plot.figure.suptitle(<span class="bu">str</span>(<span class="bu">round</span>(coeffs[<span class="dv">0</span>], <span class="dv">2</span>)) <span class="op">+</span> <span class="vs">r'$x_1$ - '</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">round</span>(<span class="op">-</span>coeffs[<span class="dv">1</span>], <span class="dv">2</span>)) <span class="op">+</span> <span class="vs">r'$x_2 = 0$'</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">## fill in area</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>x_fill <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, num<span class="op">=</span><span class="dv">200</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>y_line <span class="op">=</span> coeff <span class="op">*</span> x_fill</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>logit_plot.ax.fill_between(x_fill, y_line, <span class="dv">2</span>, color<span class="op">=</span><span class="st">'blue'</span>, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>logit_plot.ax.fill_between(x_fill, <span class="op">-</span><span class="dv">2</span>, y_line, color<span class="op">=</span><span class="st">'orange'</span>, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>logit_plot.ax.annotate(<span class="vs">r'$\bf P(Y=1)&lt;0.5$'</span>, (<span class="fl">0.5</span>, <span class="fl">2.1</span>), color<span class="op">=</span><span class="st">'blue'</span>)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>logit_plot.ax.annotate(<span class="vs">r'$\bf P(Y=1)&gt;0.5$'</span>, (<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">2.2</span>), color<span class="op">=</span><span class="st">'darkorange'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>logit_plot <span class="op">=</span> sns.relplot(df, x<span class="op">=</span><span class="st">'x1'</span>, y<span class="op">=</span><span class="st">'x2'</span>, hue<span class="op">=</span><span class="st">'y'</span>, style<span class="op">=</span><span class="st">'y'</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plt.axline([<span class="dv">0</span>,<span class="dv">0</span>], slope<span class="op">=</span>coeff)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">## title</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>logit_plot.figure.subplots_adjust(top<span class="op">=</span><span class="fl">.9</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>logit_plot.figure.suptitle(<span class="bu">str</span>(<span class="bu">round</span>(coeffs[<span class="dv">0</span>], <span class="dv">2</span>)) <span class="op">+</span> <span class="vs">r'$x_1$ - '</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">round</span>(<span class="op">-</span>coeffs[<span class="dv">1</span>], <span class="dv">2</span>)) <span class="op">+</span> <span class="vs">r'$x_2 = 0$'</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">## fill in area</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>x_fill <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, num<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>y_line <span class="op">=</span> coeff <span class="op">*</span> x_fill</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>logit_plot.ax.fill_between(x_fill, y_line, <span class="dv">2</span>, color<span class="op">=</span><span class="st">'blue'</span>, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>logit_plot.ax.fill_between(x_fill, <span class="op">-</span><span class="dv">2</span>, y_line, color<span class="op">=</span><span class="st">'orange'</span>, alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>logit_plot.ax.annotate(<span class="vs">r'$\bf P(Y=1)&lt;0.5$'</span>, (<span class="fl">0.5</span>, <span class="fl">2.1</span>), color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>logit_plot.ax.annotate(<span class="vs">r'$\bf P(Y=1)&gt;0.5$'</span>, (<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">2.2</span>), color<span class="op">=</span><span class="st">'darkorange'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="109">
 <pre><code>Text(0.5, -2.2, '$\\bf P(Y=1)&gt;0.5$')</code></pre>
 </div>
@@ -1284,33 +1228,33 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 </div>
 </div>
 <div id="cell-32" class="cell" data-execution_count="110">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a meshgrid for x1 and x2</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>x1_range <span class="op">=</span> np.linspace(x[:, <span class="dv">0</span>].<span class="bu">min</span>(), x[:, <span class="dv">0</span>].<span class="bu">max</span>(), <span class="dv">200</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>x2_range <span class="op">=</span> np.linspace(x[:, <span class="dv">1</span>].<span class="bu">min</span>(), x[:, <span class="dv">1</span>].<span class="bu">max</span>(), <span class="dv">200</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>X1, X2 <span class="op">=</span> np.meshgrid(x1_range, x2_range)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the sigmoid function using the fitted logistic regression coefficients</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>(log_fit.intercept_[<span class="dv">0</span>] <span class="op">+</span> log_fit.coef_[<span class="dv">0</span>,<span class="dv">0</span>]<span class="op">*</span>X1 <span class="op">+</span> log_fit.coef_[<span class="dv">0</span>,<span class="dv">1</span>]<span class="op">*</span>X2)))</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">7</span>))</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Set background to white</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>ax.set_facecolor(<span class="st">'white'</span>)</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>fig.patch.set_facecolor(<span class="st">'white'</span>)</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot with smooth color transitions</span></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>surf <span class="op">=</span> ax.plot_surface(X1, X2, Z, cmap<span class="op">=</span><span class="st">'coolwarm'</span>, antialiased<span class="op">=</span><span class="va">True</span>, linewidth<span class="op">=</span><span class="dv">0</span>, rstride<span class="op">=</span><span class="dv">1</span>, cstride<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>ax.view_init(elev<span class="op">=</span><span class="dv">15</span>, azim<span class="op">=</span><span class="dv">65</span><span class="op">+</span><span class="dv">155</span>)</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'x1'</span>)</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'x2'</span>)</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r'P(y=1)'</span>)</span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">" "</span><span class="op">*</span><span class="dv">115</span>) </span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>ax.text2D(<span class="fl">0.5</span>, <span class="fl">0.91</span>, <span class="vs">r'g('</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">round</span>(coeffs[<span class="dv">0</span>], <span class="dv">2</span>)) <span class="op">+</span> <span class="vs">r'$x_1$  '</span> <span class="op">+</span></span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>         <span class="bu">str</span>(<span class="bu">round</span>(coeffs[<span class="dv">1</span>], <span class="dv">2</span>)) <span class="op">+</span> <span class="vs">r'$x_2)$'</span>,</span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>         transform<span class="op">=</span>ax.transAxes, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'top'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a meshgrid for x1 and x2</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>x1_range <span class="op">=</span> np.linspace(x[:, <span class="dv">0</span>].<span class="bu">min</span>(), x[:, <span class="dv">0</span>].<span class="bu">max</span>(), <span class="dv">200</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>x2_range <span class="op">=</span> np.linspace(x[:, <span class="dv">1</span>].<span class="bu">min</span>(), x[:, <span class="dv">1</span>].<span class="bu">max</span>(), <span class="dv">200</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>X1, X2 <span class="op">=</span> np.meshgrid(x1_range, x2_range)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the sigmoid function using the fitted logistic regression coefficients</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> (<span class="dv">1</span> <span class="op">+</span> np.exp(<span class="op">-</span>(log_fit.intercept_[<span class="dv">0</span>] <span class="op">+</span> log_fit.coef_[<span class="dv">0</span>,<span class="dv">0</span>]<span class="op">*</span>X1 <span class="op">+</span> log_fit.coef_[<span class="dv">0</span>,<span class="dv">1</span>]<span class="op">*</span>X2)))</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">7</span>))</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Set background to white</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>ax.set_facecolor(<span class="st">'white'</span>)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>fig.patch.set_facecolor(<span class="st">'white'</span>)</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot with smooth color transitions</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>surf <span class="op">=</span> ax.plot_surface(X1, X2, Z, cmap<span class="op">=</span><span class="st">'coolwarm'</span>, antialiased<span class="op">=</span><span class="va">True</span>, linewidth<span class="op">=</span><span class="dv">0</span>, rstride<span class="op">=</span><span class="dv">1</span>, cstride<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>ax.view_init(elev<span class="op">=</span><span class="dv">15</span>, azim<span class="op">=</span><span class="dv">65</span><span class="op">+</span><span class="dv">155</span>)</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'x1'</span>)</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'x2'</span>)</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="vs">r'P(y=1)'</span>)</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">" "</span><span class="op">*</span><span class="dv">115</span>) </span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>ax.text2D(<span class="fl">0.5</span>, <span class="fl">0.91</span>, <span class="vs">r'g('</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">round</span>(coeffs[<span class="dv">0</span>], <span class="dv">2</span>)) <span class="op">+</span> <span class="vs">r'$x_1$  '</span> <span class="op">+</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>         <span class="bu">str</span>(<span class="bu">round</span>(coeffs[<span class="dv">1</span>], <span class="dv">2</span>)) <span class="op">+</span> <span class="vs">r'$x_2)$'</span>,</span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>         transform<span class="op">=</span>ax.transAxes, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'top'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="110">
 <pre><code>Text(0.5, 0.91, 'g(1.76$x_1$  -1.8$x_2)$')</code></pre>
 </div>
@@ -1326,30 +1270,30 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 <section id="principal-components-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="principal-components-analysis">Principal Components Analysis</h2>
 <div id="cell-34" class="cell" data-execution_count="111">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> Axes3D(fig)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>fig.add_axes(ax)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> matplotlib.colors.ListedColormap(sns.color_palette(<span class="st">"Paired"</span>, <span class="dv">3</span>))</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> penguins[<span class="st">'species'</span>].copy()</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>cols[cols<span class="op">==</span><span class="st">'Adelie'</span>]<span class="op">=</span><span class="dv">1</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>cols[cols<span class="op">==</span><span class="st">'Chinstrap'</span>]<span class="op">=</span><span class="dv">2</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>cols[cols<span class="op">==</span><span class="st">'Gentoo'</span>]<span class="op">=</span><span class="dv">3</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> ax.scatter3D(penguins[<span class="st">'bill_depth_mm'</span>],</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>                penguins[<span class="st">'bill_length_mm'</span>],</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>                penguins[<span class="st">'flipper_length_mm'</span>],</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>                c <span class="op">=</span> cols,</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>                cmap<span class="op">=</span>cmap,</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>                alpha<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'bill depth'</span>)</span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'bill length'</span>)</span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">'flipper length'</span>)</span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>ax.set_facecolor((<span class="fl">1.0</span>, <span class="fl">1.0</span>, <span class="fl">1.0</span>, <span class="fl">0.0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> sns.load_dataset(<span class="st">"penguins"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> Axes3D(fig)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>fig.add_axes(ax)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> matplotlib.colors.ListedColormap(sns.color_palette(<span class="st">"Paired"</span>, <span class="dv">3</span>))</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>cols <span class="op">=</span> penguins[<span class="st">'species'</span>].copy()</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>cols[cols<span class="op">==</span><span class="st">'Adelie'</span>]<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>cols[cols<span class="op">==</span><span class="st">'Chinstrap'</span>]<span class="op">=</span><span class="dv">2</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>cols[cols<span class="op">==</span><span class="st">'Gentoo'</span>]<span class="op">=</span><span class="dv">3</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> ax.scatter3D(penguins[<span class="st">'bill_depth_mm'</span>],</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>                penguins[<span class="st">'bill_length_mm'</span>],</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>                penguins[<span class="st">'flipper_length_mm'</span>],</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>                c <span class="op">=</span> cols,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>                cmap<span class="op">=</span>cmap,</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>                alpha<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'bill depth'</span>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'bill length'</span>)</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">'flipper length'</span>)</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>ax.set_facecolor((<span class="fl">1.0</span>, <span class="fl">1.0</span>, <span class="fl">1.0</span>, <span class="fl">0.0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1359,18 +1303,18 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 </div>
 </div>
 <div id="cell-35" class="cell" data-execution_count="112">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> penguins[[<span class="st">'bill_depth_mm'</span>, <span class="st">'bill_length_mm'</span>, <span class="st">'flipper_length_mm'</span>]]</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x.dropna(axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>pca_fit <span class="op">=</span> PCA()</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>pca_fit.fit(x)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> pca_fit.transform(x)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>z_df <span class="op">=</span> pd.DataFrame(z[:, <span class="dv">0</span>:<span class="dv">2</span>], columns <span class="op">=</span> [<span class="st">'z1'</span>, <span class="st">'z2'</span>])</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>z_df[<span class="st">'species'</span>]<span class="op">=</span>penguins[<span class="st">'species'</span>]</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>sns.set_theme()</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>pca_plot <span class="op">=</span> sns.relplot(z_df, x<span class="op">=</span><span class="st">'z1'</span>, y<span class="op">=</span><span class="st">'z2'</span>, hue<span class="op">=</span><span class="st">'species'</span>, palette<span class="op">=</span>sns.color_palette(<span class="st">"Paired"</span>, <span class="dv">3</span>), height<span class="op">=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> penguins[[<span class="st">'bill_depth_mm'</span>, <span class="st">'bill_length_mm'</span>, <span class="st">'flipper_length_mm'</span>]]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x.dropna(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>pca_fit <span class="op">=</span> PCA()</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>pca_fit.fit(x)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> pca_fit.transform(x)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>z_df <span class="op">=</span> pd.DataFrame(z[:, <span class="dv">0</span>:<span class="dv">2</span>], columns <span class="op">=</span> [<span class="st">'z1'</span>, <span class="st">'z2'</span>])</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>z_df[<span class="st">'species'</span>]<span class="op">=</span>penguins[<span class="st">'species'</span>]</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>sns.set_theme()</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>pca_plot <span class="op">=</span> sns.relplot(z_df, x<span class="op">=</span><span class="st">'z1'</span>, y<span class="op">=</span><span class="st">'z2'</span>, hue<span class="op">=</span><span class="st">'species'</span>, palette<span class="op">=</span>sns.color_palette(<span class="st">"Paired"</span>, <span class="dv">3</span>), height<span class="op">=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1380,10 +1324,10 @@ document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
 </div>
 </div>
 <div id="cell-36" class="cell" data-execution_count="113">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>PC_values <span class="op">=</span> np.linspace(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">3</span>).reshape(<span class="dv">3</span>,<span class="dv">1</span>)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>scree_df <span class="op">=</span> np.hstack([PC_values, pca_fit.explained_variance_ratio_.reshape(<span class="dv">3</span>,<span class="dv">1</span>)])</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>scree_df <span class="op">=</span> pd.DataFrame(scree_df, columns <span class="op">=</span> [<span class="st">'Principal Components'</span>, <span class="st">'Explained Variance Ratio'</span>])</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>scree_plot <span class="op">=</span> sns.relplot(scree_df, x<span class="op">=</span><span class="st">'Principal Components'</span>, y<span class="op">=</span><span class="st">'Explained Variance Ratio'</span>, marker<span class="op">=</span><span class="st">'o'</span>, kind<span class="op">=</span><span class="st">'line'</span>, height<span class="op">=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>PC_values <span class="op">=</span> np.linspace(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">3</span>).reshape(<span class="dv">3</span>,<span class="dv">1</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>scree_df <span class="op">=</span> np.hstack([PC_values, pca_fit.explained_variance_ratio_.reshape(<span class="dv">3</span>,<span class="dv">1</span>)])</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>scree_df <span class="op">=</span> pd.DataFrame(scree_df, columns <span class="op">=</span> [<span class="st">'Principal Components'</span>, <span class="st">'Explained Variance Ratio'</span>])</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>scree_plot <span class="op">=</span> sns.relplot(scree_df, x<span class="op">=</span><span class="st">'Principal Components'</span>, y<span class="op">=</span><span class="st">'Explained Variance Ratio'</span>, marker<span class="op">=</span><span class="st">'o'</span>, kind<span class="op">=</span><span class="st">'line'</span>, height<span class="op">=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
