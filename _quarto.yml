@@ -16,6 +16,10 @@ website:
       - getting-started/getting-started.ipynb
       - lec-1/lecture-1.ipynb
       - lec-2/lecture-2.ipynb
+      - lec-3/lecture-3.ipynb
+      - section: lec-4/lecture-4.ipynb
+        contents:
+        - lec-4/gpt.qmd
   repo-url: https://github.com/moran-teaching/msds534-website   
   repo-branch: main                                             
   repo-actions: [source] 
