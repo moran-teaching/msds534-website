@@ -199,6 +199,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lec-5/lecture-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 5: Generative models</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -482,7 +488,7 @@ epoch:  40 loss: 4.91e+02</code></pre>
 </div>
 <section id="resnet" class="level3">
 <h3 class="anchored" data-anchor-id="resnet">ResNet</h3>
-<p>The <code>torchvision.models</code> package provides pre-trained models like ResNet-50 (a ResNet model with 50 layers). Here, we get the predictions from ResNet-50 for pictures of the professors’ dogs. (Note this uses code from https://github.com/intro-stat-learning/ISLP_labs/blob/stable/Ch10-deeplearning-lab.ipynb)</p>
+<p>The <code>torchvision.models</code> package provides pre-trained models like ResNet-50 (a ResNet model with 50 layers). Here, we get the predictions from ResNet-50 for pictures of the professors’ dogs. (Note: this uses code from <a href="https://github.com/intro-stat-learning/ISLP_labs/blob/stable/Ch10-deeplearning-lab.ipynb">ISLP</a>)</p>
 <div id="4ac67d9c" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchvision.models <span class="im">import</span> (resnet50, ResNet50_Weights)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchvision.transforms <span class="im">import</span> (Resize,</span>

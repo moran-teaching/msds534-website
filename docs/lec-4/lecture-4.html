@@ -242,6 +242,12 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lec-5/lecture-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 5: Generative models</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -554,7 +560,7 @@ when input is [49.0, 43.0, 43.0, 54.0, 1.0, 47.0, 58.0, 1.0] the target: 58.0</c
         [0.1250, 0.1250, 0.1250, 0.1250, 0.1250, 0.1250, 0.1250, 0.1250]])</code></pre>
 </div>
 </div>
-<div id="cell-23" class="cell" data-execution_count="34">
+<div id="cell-23" class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># version 4: self-attention!</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(<span class="dv">1337</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>B,T,C <span class="op">=</span> <span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">32</span> <span class="co"># batch, time, channels (channels is the embedding size)</span></span>
@@ -843,11 +849,11 @@ Price:  3300.0</code></pre>
 </div>
 <div id="cell-46" class="cell">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">## save model parameters</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>torch.save(model.state_dict(), <span class="st">"fine-tuned-distilbert.pt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>torch.save(model.state_dict(), <span class="st">"model/fine-tuned-distilbert.pt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-47" class="cell" data-execution_count="46">
+<div id="cell-47" class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">## load model</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>model.load_state_dict(torch.load(<span class="st">"fine-tuned-distilbert.pt"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>model.load_state_dict(torch.load(<span class="st">"model/fine-tuned-distilbert.pt"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="46">
 <pre><code>&lt;All keys matched successfully&gt;</code></pre>
 </div>
@@ -929,6 +935,7 @@ Predicted price:  12.49232006072998
 <ul>
 <li><a href="https://medium.com/@khang.pham.exxact/text-classification-with-bert-7afaacc5e49b">Text Classification with BERT</a></li>
 <li><a href="https://colab.research.google.com/drive/1pxc-ehTtnVM72-NViET_D2ZqOlpOi2LH?usp=sharing#scrollTo=SH_MAK-soD4F">Hugging Face Tutorial</a></li>
+<li><a href="https://stanford-cs324.github.io/winter2022/lectures/modeling/">Tokenization discussion</a></li>
 </ul>
 
 

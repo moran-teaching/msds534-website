@@ -20,6 +20,7 @@ website:
       - section: lec-4/lecture-4.ipynb
         contents:
         - lec-4/gpt.qmd
+      - lec-5/lecture-5.ipynb
   repo-url: https://github.com/moran-teaching/msds534-website   
   repo-branch: main                                             
   repo-actions: [source] 
