@@ -218,8 +218,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Lecture 8 - Conformalized Classification</span></span>
+      <div class="sidebar-item-container"> 
+            <a href="../lec-8/lecture-8-classification.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lecture 8 - Conformalized Classification</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lec-8/lecture-8-caveat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Caveat for Conformal Inference</span></a>
+  </div>
+</li>
+      </ul>
   </li>
     </ul>
     </div>
@@ -338,71 +351,55 @@ To: /Users/gm845/Library/CloudStorage/Box-Box/teaching/2025/msds-534/website/dat
 <pre><code>(1000, 1000)</code></pre>
 </div>
 </div>
-<div id="cell-10" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>np.take_along_axis(cal_srt, cal_pi.argsort(axis<span class="op">=</span><span class="dv">1</span>), axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
-<pre><code>array([[0.66177219, 0.99731924, 0.99660576, ..., 0.999495  , 0.99867312,
-        0.999983  ],
-       [0.97941885, 0.99974742, 0.99994773, ..., 0.99995052, 0.99994259,
-        0.99996042],
-       [0.99997203, 0.99990461, 0.9985809 , ..., 0.99999103, 0.99997215,
-        0.99990873],
-       ...,
-       [0.99999999, 0.99999999, 0.99999999, ..., 0.99999989, 0.99999998,
-        0.99999999],
-       [0.99999365, 0.99999985, 1.00000001, ..., 0.96883136, 0.99999661,
-        1.00000001],
-       [0.9999997 , 0.99999908, 0.99999991, ..., 0.99999971, 0.70352477,
-        0.99999991]], shape=(1000, 1000))</code></pre>
-</div>
+<div id="cell-10" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># applying argsort to cal_pi gets the rank</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>cal_scores <span class="op">=</span> np.take_along_axis(cal_srt, cal_pi.argsort(axis<span class="op">=</span><span class="dv">1</span>), axis<span class="op">=</span><span class="dv">1</span>)[</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(n), cal_labels</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="cell-11" class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cal_scores <span class="op">=</span> np.take_along_axis(cal_srt, cal_pi.argsort(axis<span class="op">=</span><span class="dv">1</span>), axis<span class="op">=</span><span class="dv">1</span>)[</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(n), cal_labels</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the score quantile</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>qhat <span class="op">=</span> np.quantile(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    cal_scores, np.ceil((n <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> alpha)) <span class="op">/</span> n, interpolation<span class="op">=</span><span class="st">"higher"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Deploy (output=list of length n, each element is tensor of classes)</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>val_pi <span class="op">=</span> val_smx.argsort(<span class="dv">1</span>)[:, ::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>val_srt <span class="op">=</span> np.take_along_axis(val_smx, val_pi, axis<span class="op">=</span><span class="dv">1</span>).cumsum(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>prediction_sets <span class="op">=</span> np.take_along_axis(val_srt <span class="op">&lt;=</span> qhat, val_pi.argsort(axis<span class="op">=</span><span class="dv">1</span>), axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-12" class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the score quantile</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>qhat <span class="op">=</span> np.quantile(</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    cal_scores, np.ceil((n <span class="op">+</span> <span class="dv">1</span>) <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> alpha)) <span class="op">/</span> n, interpolation<span class="op">=</span><span class="st">"higher"</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Deploy (output=list of length n, each element is tensor of classes)</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>val_pi <span class="op">=</span> val_smx.argsort(<span class="dv">1</span>)[:, ::<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>val_srt <span class="op">=</span> np.take_along_axis(val_smx, val_pi, axis<span class="op">=</span><span class="dv">1</span>).cumsum(axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>prediction_sets <span class="op">=</span> np.take_along_axis(val_srt <span class="op">&lt;=</span> qhat, val_pi.argsort(axis<span class="op">=</span><span class="dv">1</span>), axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-13" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate empirical coverage</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>empirical_coverage <span class="op">=</span> prediction_sets[</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    np.arange(prediction_sets.shape[<span class="dv">0</span>]), val_labels</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>].mean()</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The empirical coverage is: </span><span class="sc">{</span>empirical_coverage<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-12" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate empirical coverage</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>empirical_coverage <span class="op">=</span> prediction_sets[</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    np.arange(prediction_sets.shape[<span class="dv">0</span>]), val_labels</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>].mean()</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The empirical coverage is: </span><span class="sc">{</span>empirical_coverage<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>The empirical coverage is: 0.8913877551020408</code></pre>
 </div>
 </div>
-<div id="cell-14" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show some examples</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/imagenet/human_readable_labels.json"</span>) <span class="im">as</span> f:</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    label_strings <span class="op">=</span> np.array(json.load(f))</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>example_paths <span class="op">=</span> os.listdir(<span class="st">"../data/imagenet/examples"</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    rand_path <span class="op">=</span> np.random.choice(example_paths)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    img <span class="op">=</span> imread(<span class="st">"../data/imagenet/examples/"</span> <span class="op">+</span> rand_path)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    img_index <span class="op">=</span> <span class="bu">int</span>(rand_path.split(<span class="st">"."</span>)[<span class="dv">0</span>])</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    img_pi <span class="op">=</span> smx[img_index].argsort()[::<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    img_srt <span class="op">=</span> np.take_along_axis(smx[img_index], img_pi, axis<span class="op">=</span><span class="dv">0</span>).cumsum()</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    prediction_set <span class="op">=</span> np.take_along_axis(img_srt <span class="op">&lt;=</span> qhat, img_pi.argsort(), axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    plt.imshow(img)</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    plt.axis(<span class="st">"off"</span>)</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"The prediction set is: </span><span class="sc">{</span><span class="bu">list</span>(label_strings[prediction_set])<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-13" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show some examples</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"../data/imagenet/human_readable_labels.json"</span>) <span class="im">as</span> f:</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    label_strings <span class="op">=</span> np.array(json.load(f))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>example_paths <span class="op">=</span> os.listdir(<span class="st">"../data/imagenet/examples"</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    rand_path <span class="op">=</span> np.random.choice(example_paths)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    img <span class="op">=</span> imread(<span class="st">"../data/imagenet/examples/"</span> <span class="op">+</span> rand_path)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    img_index <span class="op">=</span> <span class="bu">int</span>(rand_path.split(<span class="st">"."</span>)[<span class="dv">0</span>])</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    img_pi <span class="op">=</span> smx[img_index].argsort()[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    img_srt <span class="op">=</span> np.take_along_axis(smx[img_index], img_pi, axis<span class="op">=</span><span class="dv">0</span>).cumsum()</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    prediction_set <span class="op">=</span> np.take_along_axis(img_srt <span class="op">&lt;=</span> qhat, img_pi.argsort(), axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    plt.figure()</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    plt.imshow(img)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    plt.axis(<span class="st">"off"</span>)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"The prediction set is: </span><span class="sc">{</span><span class="bu">list</span>(label_strings[prediction_set])<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lecture-8-classification_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="lecture-8-classification_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -412,7 +409,7 @@ To: /Users/gm845/Library/CloudStorage/Box-Box/teaching/2025/msds-534/website/dat
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lecture-8-classification_files/figure-html/cell-14-output-3.png" class="img-fluid figure-img"></p>
+<p><img src="lecture-8-classification_files/figure-html/cell-13-output-3.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -422,7 +419,7 @@ To: /Users/gm845/Library/CloudStorage/Box-Box/teaching/2025/msds-534/website/dat
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lecture-8-classification_files/figure-html/cell-14-output-5.png" class="img-fluid figure-img"></p>
+<p><img src="lecture-8-classification_files/figure-html/cell-13-output-5.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -432,7 +429,7 @@ To: /Users/gm845/Library/CloudStorage/Box-Box/teaching/2025/msds-534/website/dat
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lecture-8-classification_files/figure-html/cell-14-output-7.png" class="img-fluid figure-img"></p>
+<p><img src="lecture-8-classification_files/figure-html/cell-13-output-7.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -442,7 +439,7 @@ To: /Users/gm845/Library/CloudStorage/Box-Box/teaching/2025/msds-534/website/dat
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lecture-8-classification_files/figure-html/cell-14-output-9.png" class="img-fluid figure-img"></p>
+<p><img src="lecture-8-classification_files/figure-html/cell-13-output-9.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -452,7 +449,7 @@ To: /Users/gm845/Library/CloudStorage/Box-Box/teaching/2025/msds-534/website/dat
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lecture-8-classification_files/figure-html/cell-14-output-11.png" class="img-fluid figure-img"></p>
+<p><img src="lecture-8-classification_files/figure-html/cell-13-output-11.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -462,7 +459,7 @@ To: /Users/gm845/Library/CloudStorage/Box-Box/teaching/2025/msds-534/website/dat
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lecture-8-classification_files/figure-html/cell-14-output-13.png" class="img-fluid figure-img"></p>
+<p><img src="lecture-8-classification_files/figure-html/cell-13-output-13.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -472,7 +469,7 @@ To: /Users/gm845/Library/CloudStorage/Box-Box/teaching/2025/msds-534/website/dat
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lecture-8-classification_files/figure-html/cell-14-output-15.png" class="img-fluid figure-img"></p>
+<p><img src="lecture-8-classification_files/figure-html/cell-13-output-15.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -482,7 +479,7 @@ To: /Users/gm845/Library/CloudStorage/Box-Box/teaching/2025/msds-534/website/dat
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lecture-8-classification_files/figure-html/cell-14-output-17.png" class="img-fluid figure-img"></p>
+<p><img src="lecture-8-classification_files/figure-html/cell-13-output-17.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -492,7 +489,7 @@ To: /Users/gm845/Library/CloudStorage/Box-Box/teaching/2025/msds-534/website/dat
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="lecture-8-classification_files/figure-html/cell-14-output-19.png" class="img-fluid figure-img"></p>
+<p><img src="lecture-8-classification_files/figure-html/cell-13-output-19.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
