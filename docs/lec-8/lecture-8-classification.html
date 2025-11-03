@@ -234,6 +234,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lec-9/lecture-9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lecture 9 - Hypothesis Tests</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -352,7 +358,7 @@ To: /Users/gm845/Library/CloudStorage/Box-Box/teaching/2025/msds-534/website/dat
 </div>
 </div>
 <div id="cell-10" class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># applying argsort to cal_pi gets the rank</span></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># applying argsort to cal_pi gets the rank - we reorder cal_srt to original space</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>cal_scores <span class="op">=</span> np.take_along_axis(cal_srt, cal_pi.argsort(axis<span class="op">=</span><span class="dv">1</span>), axis<span class="op">=</span><span class="dv">1</span>)[</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">range</span>(n), cal_labels</span>
