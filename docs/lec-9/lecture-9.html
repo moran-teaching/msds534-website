@@ -324,7 +324,7 @@ window.Quarto = {
 </header>
 
 
-<div id="cell-1" class="cell" data-execution_count="18">
+<div id="cell-1" class="cell" data-execution_count="144">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn <span class="im">as</span> nn</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.optim <span class="im">as</span> optim</span>
@@ -333,8 +333,8 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>torch.manual_seed(<span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
-<pre><code>&lt;torch._C.Generator at 0x10ff1c830&gt;</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="144">
+<pre><code>&lt;torch._C.Generator at 0x112a1c3f0&gt;</code></pre>
 </div>
 </div>
 <section id="two-sample-test" class="level2">
@@ -347,7 +347,7 @@ window.Quarto = {
 <p>We conduct a permutation test to test whether CTR for A (<span class="math inline">\theta_A</span>) is equal to CTR for B (<span class="math inline">\theta_B</span>).</p>
 <p><span class="math inline">H_0: \theta_A=\theta_B, \quad H_1: \theta_A \neq \theta_B</span>.</p>
 <p>Our test statistic is <span class="math inline">|\hat{\theta}_A-\hat{\theta}_B|</span>.</p>
-<div id="cell-3" class="cell" data-execution_count="19">
+<div id="cell-3" class="cell" data-execution_count="145">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_viewsA <span class="op">=</span> <span class="dv">98</span> <span class="co"># number of clicks for video A</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>my_viewsB <span class="op">=</span> <span class="dv">162</span> <span class="co"># number of clicks for video B</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -356,35 +356,35 @@ window.Quarto = {
 </div>
 <p>Dataset A: <span class="math inline">(1, \dots, 1, 0, 0, \dots, 0)</span> (98 ones, 902 zeros)</p>
 <p>Dataset B: <span class="math inline">(1,\dots, 1, 0, \dots, 0)</span> (162 ones, 1838 zeros)</p>
-<div id="cell-5" class="cell" data-execution_count="20">
+<div id="cell-5" class="cell" data-execution_count="146">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>my_viewsA<span class="op">/</span>n_impsA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="146">
 <pre><code>0.098</code></pre>
 </div>
 </div>
-<div id="cell-6" class="cell" data-execution_count="21">
+<div id="cell-6" class="cell" data-execution_count="147">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>my_viewsB<span class="op">/</span>n_impsB</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="147">
 <pre><code>0.081</code></pre>
 </div>
 </div>
-<div id="cell-7" class="cell" data-execution_count="22">
+<div id="cell-7" class="cell" data-execution_count="148">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>obs_T <span class="op">=</span> <span class="bu">abs</span>(my_viewsA<span class="op">/</span>n_impsA <span class="op">-</span> my_viewsB<span class="op">/</span>n_impsB) <span class="co"># |theta_1 - theta_2|</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-8" class="cell" data-execution_count="23">
+<div id="cell-8" class="cell" data-execution_count="149">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>obs_T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="149">
 <pre><code>0.017</code></pre>
 </div>
 </div>
 <p>We pool the Dataset A and Dataset B. (We will shuffle Dataset A and Dataset B in the permutation test).</p>
-<div id="cell-10" class="cell" data-execution_count="24">
+<div id="cell-10" class="cell" data-execution_count="150">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>all_views <span class="op">=</span> my_viewsA <span class="op">+</span> my_viewsB</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>all_imps <span class="op">=</span> n_impsA <span class="op">+</span> n_impsB</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>pool <span class="op">=</span> np.array([<span class="dv">1</span>]<span class="op">*</span>all_views <span class="op">+</span> [<span class="dv">0</span>]<span class="op">*</span>(all_imps <span class="op">-</span> all_views))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here is an example of a random draw from the null distribution (that the CTR of A and B is the same).</p>
-<div id="cell-12" class="cell" data-execution_count="25">
+<div id="cell-12" class="cell" data-execution_count="151">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample without replacement for impsA</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>impsA <span class="op">=</span> np.random.choice(pool, n_impsA, replace<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># new permuted dataset of size n_impsA</span></span>
@@ -397,7 +397,7 @@ window.Quarto = {
 <li>for each sample <span class="math inline">s=1,\dots, 500</span>, calculate <span class="math inline">T_s = |\hat{\theta}_{A, s}-\hat{\theta}_{B, s}|</span></li>
 <li>locate actual observed <span class="math inline">T_{obs}=|\hat{\theta}_A-\hat{\theta}_B|</span> in sample distribution: <span class="math display">\text{p-val} = \frac{1}{S}\sum_{s=1}^{500} \mathbb{1}(T_s\geq T_{obs} )</span></li>
 </ul>
-<div id="cell-14" class="cell" data-execution_count="26">
+<div id="cell-14" class="cell" data-execution_count="152">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>n_perm <span class="op">=</span> <span class="dv">500</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>resampled_Ts <span class="op">=</span> np.zeros(n_perm) <span class="co"># where to store our permutation test statistics</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -425,7 +425,7 @@ window.Quarto = {
 <span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>plt.axvline(obs_T, color<span class="op">=</span><span class="st">'red'</span>)</span>
 <span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>P-Value: 0.1480</code></pre>
+<pre><code>P-Value: 0.1140</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
@@ -460,25 +460,26 @@ window.Quarto = {
 </ul></li>
 <li>Calculate <span class="math inline">p</span>-value: <span class="math display">\text{p-val} = \frac{1}{S}\sum_{s=1}^{500} \mathbb{1}(T_s\geq T_{obs} )</span></li>
 </ul>
-<div id="cell-17" class="cell" data-execution_count="27">
+<div id="cell-17" class="cell" data-execution_count="153">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> NNet(nn.Module):</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, in_dim, out_dim):</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>(NNet, <span class="va">self</span>).<span class="fu">__init__</span>()</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.sequential <span class="op">=</span> nn.Sequential(</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>            nn.Linear(in_dim, <span class="dv">2</span><span class="op">*</span>in_dim),</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>            nn.ReLU(),</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>            nn.Linear(<span class="dv">2</span><span class="op">*</span>in_dim, out_dim))</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.sequential(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>            nn.Dropout(<span class="fl">0.5</span>),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>            nn.Linear(<span class="dv">2</span><span class="op">*</span>in_dim, out_dim))</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> forward(<span class="va">self</span>, x):</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.sequential(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We create simulated data which we know is NOT independent.</p>
 <p>Ideally, we should reject the null hypothesis that <span class="math inline">Y</span> and <span class="math inline">X</span> are independent.</p>
-<div id="cell-19" class="cell" data-execution_count="28">
+<div id="cell-19" class="cell" data-execution_count="154">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="op">=</span> <span class="dv">5</span> <span class="co"># dimension of X</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="op">=</span> <span class="dv">3</span> <span class="co"># dimension of Y</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>signal_strength <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>signal_strength <span class="op">=</span> <span class="fl">0.3</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="dv">10000</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
@@ -493,8 +494,8 @@ window.Quarto = {
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> torch.tensor(X, dtype<span class="op">=</span>torch.float32)</span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> torch.tensor(Y, dtype<span class="op">=</span>torch.float32)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-20" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> testerr(x, y, epochs<span class="op">=</span><span class="dv">100</span>):</span>
+<div id="cell-20" class="cell" data-execution_count="155">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> testerr(x, y, epochs<span class="op">=</span><span class="dv">200</span>):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># trains a neural network to predict y from x</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    ntrain <span class="op">=</span> <span class="bu">int</span>(n_samples <span class="op">*</span> <span class="fl">0.7</span>) <span class="co"># train on 70% of the data</span></span>
@@ -507,7 +508,7 @@ window.Quarto = {
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    y_test <span class="op">=</span> y[ntrain:]</span>
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    net <span class="op">=</span> NNet(p1, p2)</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    net.train()</span>
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    optimizer <span class="op">=</span> optim.Adam(net.parameters(), lr<span class="op">=</span><span class="fl">0.2</span>)</span>
 <span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
 <span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()</span>
@@ -517,21 +518,22 @@ window.Quarto = {
 <span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>        loss.backward()</span>
 <span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>        optimizer.step()</span>
 <span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> net(x_test)</span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    loss <span class="op">=</span> nn.MSELoss(reduction<span class="op">=</span><span class="st">'mean'</span>)(outputs, y_test)</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> loss.item()</span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="co"># our observed test statistic is the loss in predicting y from x</span></span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>obs_T <span class="op">=</span> testerr(X, Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    net.<span class="bu">eval</span>()</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> net(x_test)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    loss <span class="op">=</span> nn.MSELoss(reduction<span class="op">=</span><span class="st">'mean'</span>)(outputs, y_test)</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> loss.item()</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="co"># our observed test statistic is the loss in predicting y from x</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>obs_T <span class="op">=</span> testerr(X, Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-21" class="cell" data-execution_count="30">
+<div id="cell-21" class="cell" data-execution_count="156">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>obs_T</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="30">
-<pre><code>1.0047097206115723</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="156">
+<pre><code>1.0054599046707153</code></pre>
 </div>
 </div>
-<div id="cell-22" class="cell" data-execution_count="31">
+<div id="cell-22" class="cell" data-execution_count="157">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform permutation testing</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>n_permutations <span class="op">=</span> <span class="dv">500</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>resampled_Ts <span class="op">=</span> []</span>
@@ -541,7 +543,7 @@ window.Quarto = {
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    resampled_T <span class="op">=</span> testerr(X, permuted_Y) <span class="co"># train a neural network, output training loss</span></span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    resampled_Ts.append(resampled_T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-23" class="cell" data-execution_count="32">
+<div id="cell-23" class="cell" data-execution_count="158">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate p-value</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>p_value <span class="op">=</span> <span class="bu">sum</span>([<span class="dv">1</span> <span class="cf">for</span> t <span class="kw">in</span> resampled_Ts <span class="cf">if</span> t <span class="op">&lt;=</span> obs_T]) <span class="op">/</span> n_permutations</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -561,8 +563,8 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Observed test statistic: 1.0047
-P-Value: 0.0580</code></pre>
+<pre><code>Observed test statistic: 1.0055
+P-Value: 0.0080</code></pre>
 </div>
 </div>
 </section>
@@ -584,7 +586,7 @@ P-Value: 0.0580</code></pre>
 </ul></li>
 <li>Calculate <span class="math inline">p</span>-value</li>
 </ul>
-<div id="cell-25" class="cell" data-execution_count="33">
+<div id="cell-25" class="cell" data-execution_count="159">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">## sample split</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>ntrain <span class="op">=</span> <span class="bu">int</span>(n_samples <span class="op">*</span> <span class="fl">0.7</span>) <span class="co"># train on 70% of the data</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>ntest <span class="op">=</span> n_samples <span class="op">-</span> ntrain</span>
@@ -595,61 +597,61 @@ P-Value: 0.0580</code></pre>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>Y_train <span class="op">=</span> Y[:ntrain]</span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>Y_test <span class="op">=</span> Y[ntrain:]</span>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>net <span class="op">=</span> NNet(p1, p2)</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>Y_train_centered <span class="op">=</span> Y_train <span class="op">-</span> torch.mean(Y_train, dim<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>net <span class="op">=</span> NNet(p1, p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-26" class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">200</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> optim.SGD(net.parameters(), lr<span class="op">=</span><span class="fl">.1</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    optimizer.zero_grad()</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> net(X_train)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    loss <span class="op">=</span> nn.MSELoss(reduction<span class="op">=</span><span class="st">'mean'</span>)(outputs, Y_train_centered)</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    loss.backward()</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    optimizer.step()</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>testerrs <span class="op">=</span> torch.<span class="bu">sum</span>((Y_test <span class="op">-</span> net(X_test) <span class="op">-</span> torch.mean(Y_train, dim<span class="op">=</span><span class="dv">0</span>))<span class="op">**</span><span class="dv">2</span>, dim<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>mean_testerr <span class="op">=</span> torch.mean(testerrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-26" class="cell" data-execution_count="160">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>net.train()</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>epochs <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> optim.Adam(net.parameters(), lr<span class="op">=</span><span class="fl">.2</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> epoch <span class="kw">in</span> <span class="bu">range</span>(epochs):</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    optimizer.zero_grad()</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> net(X_train)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    loss <span class="op">=</span> nn.MSELoss(reduction<span class="op">=</span><span class="st">'mean'</span>)(outputs, Y_train)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    loss.backward()</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    optimizer.step()</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>net.<span class="bu">eval</span>()</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>testerrs <span class="op">=</span> torch.<span class="bu">sum</span>((Y_test <span class="op">-</span> net(X_test))<span class="op">**</span><span class="dv">2</span>, dim<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>mean_testerr <span class="op">=</span> torch.mean(testerrs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-27" class="cell" data-execution_count="35">
+<div id="cell-27" class="cell" data-execution_count="161">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>testerrs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="35">
-<pre><code>tensor([2.5163, 8.0750, 1.9151,  ..., 7.1741, 0.8597, 3.6098],
+<div class="cell-output cell-output-display" data-execution_count="161">
+<pre><code>tensor([0.6410, 0.7331, 6.1261,  ..., 4.2328, 1.2628, 4.6177],
        grad_fn=&lt;SumBackward1&gt;)</code></pre>
 </div>
 </div>
-<div id="cell-28" class="cell" data-execution_count="36">
+<div id="cell-28" class="cell" data-execution_count="162">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>nullerrs <span class="op">=</span> torch.<span class="bu">sum</span>((Y_test <span class="op">-</span> torch.mean(Y_train, dim<span class="op">=</span><span class="dv">0</span>))<span class="op">**</span><span class="dv">2</span>, dim<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>mean_nullerr <span class="op">=</span> torch.mean( nullerrs )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-29" class="cell" data-execution_count="37">
+<div id="cell-29" class="cell" data-execution_count="163">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>nullerrs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="37">
-<pre><code>tensor([2.2313, 7.9352, 1.9563,  ..., 7.6444, 0.8521, 3.3415])</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="163">
+<pre><code>tensor([0.7893, 0.7796, 5.9333,  ..., 4.5801, 1.6773, 4.4518])</code></pre>
 </div>
 </div>
-<div id="cell-30" class="cell" data-execution_count="38">
+<div id="cell-30" class="cell" data-execution_count="164">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean Test Errors: </span><span class="sc">{</span>mean_testerr<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mean Null Test Errors: </span><span class="sc">{</span>mean_nullerr<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>obs_T <span class="op">=</span> mean_testerr <span class="op">-</span> mean_nullerr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean Test Errors: 2.9884
-Mean Null Test Errors: 3.0283</code></pre>
+<pre><code>Mean Test Errors: 3.0165
+Mean Null Test Errors: 3.0656</code></pre>
 </div>
 </div>
-<div id="cell-31" class="cell" data-execution_count="39">
+<div id="cell-31" class="cell" data-execution_count="165">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>combined <span class="op">=</span> torch.stack((testerrs, nullerrs), dim<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-32" class="cell" data-execution_count="41">
+<div id="cell-32" class="cell" data-execution_count="166">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>heads <span class="op">=</span> torch.randint(<span class="dv">0</span>, <span class="dv">2</span>, (ntest,))</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>resampled_testerrs <span class="op">=</span> combined[torch.arange(ntest), heads]</span>
 <span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>resampled_nullerrs <span class="op">=</span> combined[torch.arange(ntest), <span class="dv">1</span><span class="op">-</span>heads]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-33" class="cell" data-execution_count="42">
+<div id="cell-33" class="cell" data-execution_count="167">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>n_permutations <span class="op">=</span> <span class="dv">500</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>resampled_Ts <span class="op">=</span> []</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
