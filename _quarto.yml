@@ -27,6 +27,7 @@ website:
         contents:
         - lec-8/lecture-8-caveat.ipynb      
       - lec-9/lecture-9.ipynb   
+      - lec-10/lecture-10.ipynb   
   repo-url: https://github.com/moran-teaching/msds534-website   
   repo-branch: main                                             
   repo-actions: [source] 
