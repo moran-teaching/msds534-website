@@ -571,7 +571,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>We now calculate the inverse probability weighting estimator as an estimator of the ATE:</p>
-<p><span class="math inline">IPW = \frac{1}{n}\sum_{i=1}^n \frac{T_i Y_i}{q(T_i|X_i)} + \frac{(1-T_i)Y_i}{(1-q(T_i|X_i))}</span></p>
+<p><span class="math inline">IPW = \frac{1}{n}\sum_{i=1}^n \frac{T_i Y_i}{q(T_i|X_i)} - \frac{(1-T_i)Y_i}{(1-q(T_i|X_i))}</span></p>
 <div id="cell-36" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inverse probability weighting (IPW)</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>ipw <span class="op">=</span> y <span class="op">*</span> t <span class="op">/</span> prop_score <span class="op">-</span> (<span class="dv">1</span> <span class="op">-</span> t) <span class="op">*</span> y <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> prop_score)</span>
